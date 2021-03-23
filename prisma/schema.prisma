@@ -1,0 +1,76 @@
+//Datenbankverbindung
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+//Datenbankgenerator
+generator client {
+  provider      = "prisma-client-js"
+}
+//Enititys
+model Program {
+  id          Int         @id @default(autoincrement())
+  title       String      @db.Char(100)
+  split       Int 
+  year        Int         @db.Year //Datentyp YEAR für MySQL
+  activities  Activity[]  
+}
+
+model Activity {
+  id          Int       @id @default(autoincrement()) 
+  date        String    @db.Char(30)
+  type        Type?     @relation(fields: [typeId], references: [id])
+  typeId      Int?  
+  location    Location? @relation(fields: [locationId], references: [id])
+  locationId  Int?
+  step        Step?     @relation(fields: [stepId], references: [id])
+  stepId      Int?
+  chief       Leader?   @relation(fields: [chiefId], references: [id])    
+  chiefId     Int?
+  planned     Boolean   @default(false)
+  program     Program?  @relation(fields: [programId], references: [id]) //Relation optional aufgrund eines BUGS von Prisma
+  programId   Int?
+  items       Item[]
+}
+
+model Type {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.Char(30)
+  activities  Activity[] 
+}
+
+model Location {
+  id          Int       @id @default(autoincrement())
+  city        String    @db.Char(30)
+  place       String?   @db.Char(50)
+  activities  Activity[] 
+}
+
+model Step {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.Char(30)
+  activities  Activity[] 
+}
+
+model Leader {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.Char(30)
+  activities  Activity[] 
+}
+
+model Item {
+  id          Int       @id @default(autoincrement()) 
+  time        String    @db.Char(6)
+  duration    Int       
+  task        String    
+  stuff       String?
+  activity    Activity? @relation(fields: [activityId], references: [id])
+  activityId  Int?
+}
+
+model Settings {
+  id        Int       @id @default(1)
+  startTime String    @db.Char(6)
+  split     Int        
+  dark      Boolean   
+}
