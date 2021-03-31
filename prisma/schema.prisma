@@ -71,6 +71,6 @@ model Item {
 model Settings {
   id        Int       @id @default(1)
   startTime String    @db.Char(6)
-  split     Int        
+  semester  Boolean    
   dark      Boolean   
 }
