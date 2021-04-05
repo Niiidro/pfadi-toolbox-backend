@@ -57,6 +57,12 @@ export interface NexusGenObjects {
     year: number; // Int!
   }
   Query: {};
+  Settings: { // root type
+    dark: boolean; // Boolean!
+    id: number; // Int!
+    semester: boolean; // Boolean!
+    startTime: string; // String!
+  }
   Step: { // root type
     id: number; // Int!
     name: string; // String!
@@ -114,6 +120,7 @@ export interface NexusGenFieldTypes {
     createLeader: NexusGenRootTypes['Leader']; // Leader!
     createLocation: NexusGenRootTypes['Location']; // Location!
     createProgram: NexusGenRootTypes['Program']; // Program!
+    createSettings: NexusGenRootTypes['Settings']; // Settings!
     createStep: NexusGenRootTypes['Step']; // Step!
     createType: NexusGenRootTypes['Type']; // Type!
     deleteActivity: NexusGenRootTypes['Activity'] | null; // Activity
@@ -121,6 +128,7 @@ export interface NexusGenFieldTypes {
     deleteLeader: NexusGenRootTypes['Leader'] | null; // Leader
     deleteLocation: NexusGenRootTypes['Location'] | null; // Location
     deleteProgram: NexusGenRootTypes['Program'] | null; // Program
+    deleteSettings: NexusGenRootTypes['Settings'] | null; // Settings
     deleteStep: NexusGenRootTypes['Step'] | null; // Step
     deleteType: NexusGenRootTypes['Type'] | null; // Type
     updateActivity: NexusGenRootTypes['Activity'] | null; // Activity
@@ -128,6 +136,7 @@ export interface NexusGenFieldTypes {
     updateLeader: NexusGenRootTypes['Leader'] | null; // Leader
     updateLocation: NexusGenRootTypes['Location'] | null; // Location
     updateProgram: NexusGenRootTypes['Program'] | null; // Program
+    updateSettings: NexusGenRootTypes['Settings'] | null; // Settings
     updateStep: NexusGenRootTypes['Step'] | null; // Step
     updateType: NexusGenRootTypes['Type'] | null; // Type
   }
@@ -149,10 +158,17 @@ export interface NexusGenFieldTypes {
     locations: NexusGenRootTypes['Location'][]; // [Location!]!
     program: NexusGenRootTypes['Program']; // Program!
     programs: NexusGenRootTypes['Program'][]; // [Program!]!
+    settings: NexusGenRootTypes['Settings']; // Settings!
     step: NexusGenRootTypes['Step']; // Step!
     steps: NexusGenRootTypes['Step'][]; // [Step!]!
     type: NexusGenRootTypes['Type']; // Type!
     types: NexusGenRootTypes['Type'][]; // [Type!]!
+  }
+  Settings: { // field return type
+    dark: boolean; // Boolean!
+    id: number; // Int!
+    semester: boolean; // Boolean!
+    startTime: string; // String!
   }
   Step: { // field return type
     activities: NexusGenRootTypes['Activity'][]; // [Activity!]!
@@ -203,6 +219,7 @@ export interface NexusGenFieldTypeNames {
     createLeader: 'Leader'
     createLocation: 'Location'
     createProgram: 'Program'
+    createSettings: 'Settings'
     createStep: 'Step'
     createType: 'Type'
     deleteActivity: 'Activity'
@@ -210,6 +227,7 @@ export interface NexusGenFieldTypeNames {
     deleteLeader: 'Leader'
     deleteLocation: 'Location'
     deleteProgram: 'Program'
+    deleteSettings: 'Settings'
     deleteStep: 'Step'
     deleteType: 'Type'
     updateActivity: 'Activity'
@@ -217,6 +235,7 @@ export interface NexusGenFieldTypeNames {
     updateLeader: 'Leader'
     updateLocation: 'Location'
     updateProgram: 'Program'
+    updateSettings: 'Settings'
     updateStep: 'Step'
     updateType: 'Type'
   }
@@ -238,10 +257,17 @@ export interface NexusGenFieldTypeNames {
     locations: 'Location'
     program: 'Program'
     programs: 'Program'
+    settings: 'Settings'
     step: 'Step'
     steps: 'Step'
     type: 'Type'
     types: 'Type'
+  }
+  Settings: { // field return type name
+    dark: 'Boolean'
+    id: 'Int'
+    semester: 'Boolean'
+    startTime: 'String'
   }
   Step: { // field return type name
     activities: 'Activity'
@@ -285,6 +311,11 @@ export interface NexusGenArgTypes {
       title: string; // String!
       year: number; // Int!
     }
+    createSettings: { // args
+      dark?: boolean | null; // Boolean
+      semester?: boolean | null; // Boolean
+      startTime?: string | null; // String
+    }
     createStep: { // args
       name: string; // String!
     }
@@ -304,6 +335,9 @@ export interface NexusGenArgTypes {
       id: number; // Int!
     }
     deleteProgram: { // args
+      id: number; // Int!
+    }
+    deleteSettings: { // args
       id: number; // Int!
     }
     deleteStep: { // args
@@ -345,6 +379,12 @@ export interface NexusGenArgTypes {
       title?: string | null; // String
       year?: number | null; // Int
     }
+    updateSettings: { // args
+      dark?: boolean | null; // Boolean
+      id: number; // Int!
+      semester?: boolean | null; // Boolean
+      startTime?: string | null; // String
+    }
     updateStep: { // args
       id: number; // Int!
       name?: string | null; // String
@@ -374,6 +414,9 @@ export interface NexusGenArgTypes {
       id: number; // Int!
     }
     program: { // args
+      id: number; // Int!
+    }
+    settings: { // args
       id: number; // Int!
     }
     step: { // args

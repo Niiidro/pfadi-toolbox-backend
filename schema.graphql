@@ -42,6 +42,7 @@ type Mutation {
   createLeader(name: String!): Leader!
   createLocation(city: String!, place: String): Location!
   createProgram(split: Int!, title: String!, year: Int!): Program!
+  createSettings(dark: Boolean, semester: Boolean, startTime: String): Settings!
   createStep(name: String!): Step!
   createType(name: String!): Type!
   deleteActivity(id: Int!): Activity
@@ -49,6 +50,7 @@ type Mutation {
   deleteLeader(id: Int!): Leader
   deleteLocation(id: Int!): Location
   deleteProgram(id: Int!): Program
+  deleteSettings(id: Int!): Settings
   deleteStep(id: Int!): Step
   deleteType(id: Int!): Type
   updateActivity(chief: Int, date: String, id: Int!, location: Int, planned: Boolean, program: Int, step: Int, type: Int): Activity
@@ -56,6 +58,7 @@ type Mutation {
   updateLeader(id: Int!, name: String): Leader
   updateLocation(city: String, id: Int!, place: String): Location
   updateProgram(id: Int!, split: Int, title: String, year: Int): Program
+  updateSettings(dark: Boolean, id: Int!, semester: Boolean, startTime: String): Settings
   updateStep(id: Int!, name: String): Step
   updateType(id: Int!, name: String): Type
 }
@@ -79,10 +82,18 @@ type Query {
   locations: [Location!]!
   program(id: Int!): Program!
   programs: [Program!]!
+  settings(id: Int!): Settings!
   step(id: Int!): Step!
   steps: [Step!]!
   type(id: Int!): Type!
   types: [Type!]!
+}
+
+type Settings {
+  dark: Boolean!
+  id: Int!
+  semester: Boolean!
+  startTime: String!
 }
 
 type Step {
