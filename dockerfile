@@ -1,16 +1,17 @@
 # Base image
-FROM node
+FROM node:lts-alpine
 
 # Make folder to put our files in
-RUN mkdir -p /usr/src/app
-RUN mkdir -p /usr/src/app/backend
+RUN mkdir -p /toolbox
+RUN mkdir -p /toolbox/backend
 
 # Set working directory so that all subsequent command runs in this folder
-WORKDIR /usr/src/app/backend
+WORKDIR /toolbox/backend
 
 # Copy package json and install dependencies
 COPY package*.json ./
-COPY prisma ./prisma/
+
+# install project dependencies
 RUN npm install
 RUN npx prisma generate
 

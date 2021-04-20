@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server'
 import { schema } from './schema'
 import { context } from './context'
 
-const server = new ApolloServer({ schema, context })
+const server = new ApolloServer({ schema, context, cors: true })
 
 server.listen().then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`)
